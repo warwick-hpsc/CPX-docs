@@ -2,12 +2,12 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'CPX'
+copyright = '2022, Archie Powell'
+author = 'Archie Powell'
 
-release = '0.1'
-version = '0.1.0'
+release = '1.9'
+version = '1.9.0'
 
 # -- General configuration
 
