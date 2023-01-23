@@ -22,7 +22,7 @@ The CPX code can be retrieved from the `feature/coupler' branch of the MG-CFD Gi
 
    $ git clone --branch feature/coupler https://github.com/warwick-hpsc/MG-CFD-app-OP2.git
    
- As CPX is currently an extension of the MG-CFD mini-app, you will need to build this mini-app to use CPX. Note that you can run simulations without MG-CFD (e.g coupling FEM-FEM), but MG-CFD will still need to be built first. First, build the following libraries:
+As CPX is currently an extension of the MG-CFD mini-app, you will need to build this mini-app to use CPX. Note that you can run simulations without MG-CFD (e.g coupling FEM-FEM), but MG-CFD will still need to be built first. First, build the following libraries:
 
 * HDF5, a data format library
 * Parmetis, a paritioner
