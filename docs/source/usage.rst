@@ -15,6 +15,7 @@ In all of our internal testing, we have coupled CFD with either SIMPIC or FEniCS
 
 Core Installation
 -----------------
+Reference `install`_.
 
 The CPX code can be retrieved from the `feature/coupler' branch of the MG-CFD GitHub:
 
