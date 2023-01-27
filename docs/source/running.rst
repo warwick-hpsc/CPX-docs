@@ -70,3 +70,12 @@ In general, the only variable worth changing is coupler_cycles, which controls t
 Configure the input of the mini-apps
 -----------------
 The last thing to do is to configure the input of the mini-apps themselves.
+
+In MG-CFD, input is specified by using the -i flag with the CPX executable at run-time. If a normal input file is provided, all instances of MG-CFD will run that input file. However, it may be beneficial to use different mesh sizes for each instance type. To do so, pass the parameter '-i file' to the cpx executable. This will override the MG-CFD input routine and instead search for a file named 'mg_files.input'. This file contains a list of MG-CFD input files for each instance of the mini-app, according to the layout specified in the CPX setup (cpx_input.cfg). For example, in simulation specified at the top of this page, the 'mg_files.input' may look like this:
+::
+   input-mgcfd_8m.dat
+   input-mgcfd_24m.dat
+   NULL
+
+This would set up a simulation where the first MG-CFD instance has an 8m mesh size, the second MG-CFD instance has a 24m, and the final parameter is left as NULL as the third instance is a SIMPIC instance.
+
