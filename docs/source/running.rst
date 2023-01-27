@@ -7,7 +7,7 @@ Before running a simulation, there are a few setup stages to perform:
 
 * Configure the CPX setup file
 * Configure the coupling parameters
-* Configure the parameters of the mini-apps
+* Configure the input of the mini-apps
 
 Configuring the CPX setup file
 -----------------
@@ -38,3 +38,35 @@ This produces the following configuration:
 .. image:: figures/CPX_diag.png
   :width: 600
   :alt: An image showing the configuration generated with the above setup file. The diagram consists of 3 boxes, two labelled 'MG-CFD' and one labelled 'SIMPIC'. The boxes have a circle inbetween each which says 'CU' on it, meaning coupler unit. Each circle is labelled, with the first label reading '4 ranks, SLIDING coupling', and the second label reading '8 ranks, OVERSET coupling.
+  
+Configure the coupling parameters
+-----------------
+Next to configure are the parameters for the coupling itself. These are set in the 'coupler_config.h' header file in the src_op directory, and are used to set how often the coupling takes place and dictate which optimizations are used. It will look similar to the following:
+:: 
+   static int coupler_cycles = 5000;
+   static int mg_conversion_factor = 10; 
+   static int fenics_conversion_factor = 1;
+   static int search_freq = 6;
+   static int MUM = 1;
+   static bool fastsearch = true; 
+   static bool ultrafastsearch = true;
+   static bool superdebug = false;
+   static bool debug = false;
+   static bool hide_search = false;
+  
+* **coupler_cycles** defines the number of communication cycles in the coupler units. In each cycle, an 'interpolation' routine is performed, where the values from a small slice of the two mini-app instances linked are averaged.
+* **mg_conversion_factor** is multiplied by coupler_cycles to calculate the number of MG Cycles (MG-CFD iterations) required to match the production application the mini-app is based off. 10 MG Cycles is equivalent to 1 production code iteration.
+* **fenics_conversion_factor** is the same as above but for the FEniCS code. As the FEniCS mini-app uses the same framework as the production application, this value is 1.
+* **search_freq controls** how often the search routine is ran in MG-CFD when it is coupled with another MG-CFD unit using the 'SLIDING' coupling type. This frequency is set at 6 which mimics the run-time overhead as the production coupled code.
+* **MUM**, standing for multi-unit mode, is used to control whether assigning ranks mimics a single coupler unit with multiple ranks or mimics each rank being a coupler unit. For best performance, MUM should be set to 1.
+* **fastsearch** controls the algorithm for the search. When it is set to false, a brute force search will be ran. When set to true, a faster tree based search is used.
+* **ultrafastsearch** mimics the effect of a cell prediction feature in the production coupler.
+* **superdebug** was used in development to disable coupling entirely and allowed mini-apps to run on their own - this is now deprecated
+* **debug controls** the amount of output from CPX. Setting the value to true outputs extra information.
+* **hide_search** was an experimental feature to overlay the search routine within interpolation routines - this is now deprecated
+
+In general, the only variable worth changing is coupler_cycles, which controls the number of MG-CFD cycles being ran in the simulation.
+
+Configure the input of the mini-apps
+-----------------
+The last thing to do is to configure the input of the mini-apps themselves.
