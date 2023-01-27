@@ -31,8 +31,10 @@ The CPX setup file is called 'cpx_input.cfg'. It is used to specify the number o
 
 * The first line must have the keyword 'TOTAL' followed by the total number of instances in the simulation. This value is the sum of the coupler units and mini-app instances. Here, the value is 5, as we are coupling 2 instances of the MG-CFD mini-app, and 1 instance of the SIMPIC mini-app using 2 coupler units.
 * The next section defines each of the mini-app instances and the number of MPI ranks associated to each instance. Here we have defined two instances of MG-CFD, each with 100 ranks, and 1 instance of SIMPIC with 1000 ranks.
-* The final section defines the coupler units. The first line specifies the number of ranks assocaited with that coupler unit, the second denotes the coupling type, and the third and fourth lines denote which two units the coupler units are coupling.
+* The final section defines the coupler units. The first line specifies the number of ranks assocaited with that coupler unit, the second denotes the coupling type, and the third and fourth lines denote which two mini-app units the coupler units are coupling.
 
-.. image:: docs/source/figures/CPX_diag.png
-  :width: 400
-  :alt: Alternative text
+This produces the following configuration:
+
+.. image:: figures/CPX_diag.png
+  :width: 600
+  :alt: An image showing the configuration generated with the above setup file. The diagram consists of 3 boxes, two labelled 'MG-CFD' and one labelled 'SIMPIC'. The boxes have a circle inbetween each which says 'CU' on it, meaning coupler unit. Each circle is labelled, with the first label reading '4 ranks, SLIDING coupling', and the second label reading '8 ranks, OVERSET coupling.
