@@ -16,5 +16,5 @@ Contents
 .. toctree::
 
    build
-   install
+   running
    
