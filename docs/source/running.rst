@@ -71,11 +71,39 @@ Configure the input of the mini-apps
 -----------------
 The last thing to do is to configure the input of the mini-apps themselves.
 
+MG-CFD
+^^^^^^^^^^^
 In MG-CFD, input is specified by using the -i flag with the CPX executable at run-time. If a normal input file is provided, all instances of MG-CFD will run that input file. However, it may be beneficial to use different mesh sizes for each instance type. To do so, pass the parameter '-i file' to the cpx executable. This will override the MG-CFD input routine and instead search for a file named 'mg_files.input'. This file contains a list of MG-CFD input files for each instance of the mini-app, according to the layout specified in the CPX setup (cpx_input.cfg). For example, in simulation specified at the top of this page, the 'mg_files.input' may look like this:
 ::
    input-mgcfd_8m.dat
    input-mgcfd_24m.dat
    NULL
 
-This would set up a simulation where the first MG-CFD instance has an 8m mesh size, the second MG-CFD instance has a 24m, and the final parameter is left as NULL as the third instance is a SIMPIC instance.
+This would set up a simulation where the first MG-CFD instance has an 8m mesh size, the second MG-CFD instance has a 24m, and the final parameter is left as NULL as the third instance is a SIMPIC instance. 
+
+MG-CFD meshes and their assocaited .dat files can be found on the `Warwick HPSC downloads page`_.
+
+.. _Warwick HPSC downloads page: https://warwick.ac.uk/fac/sci/dcs/research/systems/hpsc/software/
+
+SIMPIC
+^^^^^^^^^^^
+All instances of SIMPIC run from an input file called "simpic_parameters". This is because as a particle simulation, SIMPIC had been used in place of a combustion chamber in coupled simulations and as such only one instance is necessary in this setup. An example can be found in the SIMPIC directory of the repo. It will look something like this:
+::
+   -ppc 100 -ncpp 1000 -nt 5 -dtfactor 0.000001 -lhsv 20000 -asz 377
+   
+Most of these parameters are the same as those found in the `original SIMPIC mini-app`_. However, there is an additional flag, -asz, which is used to set the size of the SIMPIC interface between instances of other mini-apps in millions of cells. This is because when using SIMPIC to represent a combustion chamber, the size of SIMPIC mesh does not correspond to the size of the mesh that would be used in a typical combustion setup, so we create an artificial interface which we pass to the coupler unit(s).
+
+.. _original SIMPIC mini-app: https://lecad-peg.bitbucket.io/simpic/simpic.html
+
+FEniCS
+^^^^^^^^^^^
+More information coming soon.
+
+Running a coupled simulation
+-----------------
+With all of these set up, and placed in the directory of the executable (mgcfd_cpx_runtime), your coupled simulation can then be run. This a standard MPI run (or equivalent, depending on your cluster):
+::
+   mpirun -np 1200 ./mgcfd_cpx_runtime -i file
+
+Remember to ensure the number of ranks specified matches that of the CPX setup file.
 
