@@ -74,5 +74,8 @@ Then the FEniCS library can be built by running the following commands in the do
 This will build a library called libdolfinx.a in the bin directory. To link with CPX, set the following environment variables:
 ::
     export FENICS=1
+    export PETSC_INSTALL_PATH=/path/to/install
+    export DOLFINX_INSTALL_PATH=/path/to/install
+    export BOOST_INSTALL_PATH=/path/to/install
 
 Finally, rebuild CPX by running the final command in the core installation section. You can now run coupled simulations with the FEniCS mini-model.
