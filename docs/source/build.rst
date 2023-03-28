@@ -54,4 +54,25 @@ Finally, rebuild CPX by running the final command in the core installation secti
 
 FEniCS Installation
 -----------------
-More details coming soon.
+To enable coupling between FEniCS and MG-CFD, you need to build the FEniCS library. This is located in the dolfinx folder in the main CPX directory, to build FEniCS you need to first build the following libraries:
+
+* HDF5, a data format library
+* FEniCSx, a FEM solver
+* Boost, with Timer library
+* Petsc, a PDE solver
+* Parmetis, a paritioner
+* PT-Scotch, another partitioner
+* Cmake, a build manager
+
+Then the FEniCS library can be built by running the following commands in the dolfinx folder:
+::
+    mkdir build
+    cd build
+    cmake ..
+    make
+    
+This will build a library called libdolfinx.a in the bin directory. To link with CPX, set the following environment variables:
+::
+    export FENICS=1
+
+Finally, rebuild CPX by running the final command in the core installation section. You can now run coupled simulations with the FEniCS mini-model.
