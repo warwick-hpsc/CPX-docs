@@ -97,7 +97,16 @@ Most of these parameters are the same as those found in the `original SIMPIC min
 
 FEniCS
 ^^^^^^^^^^^
-More information coming soon.
+All instances of FEniCS run from an input file called "Fenics_input". This is becauase as an FEM simulation, FEniCS is used to simulate the solid regions in coupled simulations and often only one such instance is necessary, there is currently ongoing work to support multiple distinct solid regions. The FEniCS simulation is controlled with six settings:
+::
+   Thermal_iterations - the number of inner thermal iterations
+   Structural_iterations - the number of inner structural iterations
+   Thermal_outer_its - the number of outer thermal iterations
+   Structural_outer_its - the number of outer structural iterations
+   num_vertices - the number of vertices in the mesh
+   Thermomech_simulation - the flag to control which type of simulation the model uses
+   
+The first four of these parameters are self-explanatory. The variable num_vertices controls the size of the mesh the FEniCS model generates, FEniCS generates a cube mesh with a number of vertices whihc is closest to num_vertices. The final variable, Thermomech_simulation is a flag that controls which simulation the FEniCS model runs. The model is capable of running a full thermo-mech simulation or just a thermal simulation, if Thermomech_simulation is set to 1 the model runs a full thermo-mech whereas if it is not the model runs the simpler thermal simulation.
 
 Running a coupled simulation
 -----------------
