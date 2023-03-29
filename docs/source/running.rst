@@ -106,7 +106,7 @@ All instances of FEniCS run from an input file called "Fenics_input". This is be
    num_vertices - the number of vertices in the mesh
    Thermomech_simulation - the flag to control which type of simulation the model uses
    
-The rule of the first four of these are self-explanatory. The variable num_vertices controls the size of the mesh the FEniCS model generates, FEniCS generates a cube mesh with a number of vertices closest to num_vertices. The final variable, Thermomech_simulation is a flag that controls which simulation the FEniCS model runs. The model is capable of running a full thermo-mech simulation or just a thermal simulation, if Thermomech_simulation is set to 1 the model runs thermo-mech whereas if it is not the model runs the simpler thermal simulation.
+The rule of the first four of these are self-explanatory. The variable num_vertices controls the size of the mesh the FEniCS model generates, FEniCS generates a cube mesh with a number of vertices closest to num_vertices. The final variable, Thermomech_simulation is a flag that controls which simulation the FEniCS model runs. The model is capable of running a full thermo-mech simulation or just a thermal simulation, if Thermomech_simulation is set to 1 the model runs thermo-mech otherwise it runs the simpler thermal simulation.
 
 Running a coupled simulation
 -----------------
