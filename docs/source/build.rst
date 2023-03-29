@@ -54,17 +54,9 @@ Finally, rebuild CPX by running the final command in the core installation secti
 
 FEniCS Installation
 -----------------
-To enable coupling between FEniCS and MG-CFD, you need to build the FEniCS library. This is located in the dolfinx folder in the main CPX directory, to build FEniCS you need to first build the following libraries:
+To enable coupling between FEniCS and MG-CFD, you need to build the FEniCS library. This is located in the dolfinx folder in the main CPX directory. The FEniCS model depends on version 0.4.1 of the FEniCSx library, although work is ongoing to keep up-to-date with the FEniCSx releases, instructions to build this can be found here (https://docs.fenicsproject.org/dolfinx/main/python/installation).
 
-* HDF5, a data format library
-* FEniCSx, a FEM solver
-* Boost, with Timer library
-* Petsc, a PDE solver
-* Parmetis, a paritioner
-* PT-Scotch, another partitioner
-* Cmake, a build manager
-
-Then the FEniCS library can be built by running the following commands in the dolfinx folder:
+Then the CPX FEniCS library can be built by running the following commands in the dolfinx folder:
 ::
     mkdir build
     cd build
